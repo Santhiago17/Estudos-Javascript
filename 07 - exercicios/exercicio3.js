@@ -1,4 +1,4 @@
-/* Faça umm programa que calcule e imprima o salário a ser transferido para um funcionário.
+/* Faça um programa que calcule e imprima o salário a ser transferido para um funcionário.
 
 Para realizar o cálculo receba o valor bruto do salário e o adicional dos benefícios.
 
@@ -20,6 +20,36 @@ Para calcular o percentual de imposto segue as alíquotas:
         Saída:
             2050.00
 
-*/ 
+*/
 
-const {gets, print} = require('./funcoes_auxiliares3');
+const { gets, print } = require("./funcoes_auxiliares3");
+
+const valorSalario = gets();
+const valorBeneficios = gets();
+
+function calcularPorcentagem(valor, percentual) {
+  return valor * (percentual / 100);
+}
+
+function pegarAliquota(salario) {
+  if (salario >= 0 && salario <= 1100) {
+    return 5;
+  } else if (salario >= 1100.01 && salario <= 2500) {
+    return 10;
+  } else {
+    return 15;
+  }
+}
+
+const aliquotaImposto =
+  pegarAliquota(valorSalario);
+
+const valorImposto = calcularPorcentagem(
+  valorSalario,
+  aliquotaImposto
+);
+
+const valorATransferir =
+  valorSalario - valorImposto + valorBeneficios;
+
+print(valorATransferir);
